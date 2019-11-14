@@ -1,0 +1,43 @@
+﻿@using FoxClub.Models;
+@model Fox
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Nutrition Store</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Main page</a></li>
+                <li><a href="/login">Login page</a></li>
+                <li>@Html.ActionLink("Information", "information", Model)</li>
+                <li>@Html.ActionLink("Nutrition Store", "nutritionStore", Model)</li>
+                <li>@Html.ActionLink("Trick Center", "trickCenter", Model)</li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Welcome to the Store! Here you can pick food and drink for your fox!</h1>
+
+            @using (@Html.BeginForm("NutritionStore", "Home", Model, FormMethod.Post))
+            {
+                <label for="Food">Food</label>
+                <select name="Food">
+                    <option value="Tacos">Tacos</option>
+                    <option value="Chicken">Chicken</option>
+                    <option value="Pizza">Pizza</option>
+                    <option value="Apple pie">Apple pie</option>
+                </select>
+                <label for="Drink">Drink</label>
+                <select name="Drink">
+                    <option value="Coca Cola">Coca Cola</option>
+                    <option value="Fanta">Fanta</option>
+                    <option value="Sprite">Sprite</option>
+                    <option value="Orange juice">Orange juice</option>
+                </select>
+                <input type="hidden" name="name" value="@Model.Name" />
+                <button type="submit" value="submit">Change</button>
+            }
+        </main>
+    </body>
+</html>
+

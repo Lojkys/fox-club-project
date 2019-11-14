@@ -1,0 +1,47 @@
+﻿@using FoxClub.Models;
+@model Fox
+
+@{List<string> Tricks = new List<string> { "Jump", "Swim", "Run", "Move", "Ride a bike" };
+    Tricks = Tricks.Where(trick => !Model.ListOfTricks.Contains(trick)).ToList();
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Trick Center</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Main page</a></li>
+                <li><a href="/login">Login page</a></li>
+                <li>@Html.ActionLink("Information", "information", Model)</li>
+                <li>@Html.ActionLink("Nutrition Store", "nutritionStore", Model)</li>
+                <li>@Html.ActionLink("Trick Center", "trickCenter", Model)</li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Welcome to the Trick Center! Here you can learn new tricks!</h1>
+
+            @if (Tricks.Count > 0)
+            {
+
+                @using (@Html.BeginForm("Tricks", "", Model, FormMethod.Post))
+                {
+                    <select name="trick">
+                        @foreach (var trick in Tricks)
+                        {
+                            <option value="@trick">@trick</option>
+                        }
+                    </select>
+                    <input type="hidden" name="name" value="@Model.Name" />
+                    <button type="submit" value="submit">Change</button>
+                }
+            }
+            else
+            {
+                @Html.Raw("<span>You have learned all the tricks!</span>");
+            }
+        </main>
+    </body>
+</html>
+
